@@ -1,6 +1,6 @@
 import { FILE_PATH } from "../../config.js";
 
-export default async ({ response, request }) => {
+export default async ({ request, response }) => {
   const decoder = new TextDecoder();
   const encoder = new TextDecoder();
 

@@ -10,7 +10,7 @@ export default async ({ response }) => {
     response.status = 200;
     response.body = { status: "Success", todos };
   } catch (error) {
-    response.status = 400;
+    response.status = 500;
     response.body = { status: "Failed", todos: [] };
   }
 };
