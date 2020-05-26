@@ -16,8 +16,11 @@ export default async ({ response, request }) => {
     todos.push(newTodo);
 
     await Deno.writeFile(FILE_PATH, encoder.encode(JSON.stringify(todos)));
+
+    response.status = 201;
+    response.body = { status: "Success", newTodo };
   } catch (error) {
-    response.status = 400;
-    response.body = { status: "failed", todos: [] };
+    response.status = 502;
+    response.body = { status: "Failed", error };
   }
 };

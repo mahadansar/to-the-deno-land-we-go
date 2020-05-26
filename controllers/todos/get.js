@@ -8,9 +8,9 @@ export default async ({ response }) => {
     const todos = JSON.parse(decoder.decode(data));
 
     response.status = 200;
-    response.body = { status: "success", todos };
+    response.body = { status: "Success", todos };
   } catch (error) {
     response.status = 400;
-    response.body = { status: "failed", todos: [] };
+    response.body = { status: "Failed", todos: [] };
   }
 };
