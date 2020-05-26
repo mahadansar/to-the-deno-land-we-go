@@ -9,7 +9,8 @@ export default async ({ response }) => {
 
     response.status = 200;
     response.body = { status: "Success", todos };
-  } catch (error) {
+  } catch (err) {
+    console.log(err);
     response.status = 500;
     response.body = { status: "Failed", todos: [] };
   }

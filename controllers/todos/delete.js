@@ -2,13 +2,9 @@ import { FILE_PATH } from "../../config.js";
 
 export default async ({ response, params }) => {
   const decoder = new TextDecoder();
-  const encoder = new TextDecoder();
+  const encoder = new TextEncoder();
 
   try {
-    const {
-      value: { title },
-    } = await request.body();
-
     const data = await Deno.readFile(FILE_PATH);
     const todos = JSON.parse(decoder.decode(data));
 
@@ -21,8 +17,9 @@ export default async ({ response, params }) => {
 
     response.status = 200;
     response.body = { status: "Success", data: updatedTodos };
-  } catch (error) {
+  } catch (err) {
+    console.log(err);
     response.status = 502;
-    response.body = { status: "Failed", error };
+    response.body = { status: "Failed", err };
   }
 };

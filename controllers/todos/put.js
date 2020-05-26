@@ -2,7 +2,7 @@ import { FILE_PATH } from "../../config.js";
 
 export default async ({ request, response, params }) => {
   const decoder = new TextDecoder();
-  const encoder = new TextDecoder();
+  const encoder = new TextEncoder();
 
   try {
     const {
@@ -27,8 +27,9 @@ export default async ({ request, response, params }) => {
 
     response.status = 204;
     response.body = { status: "Success", data: updatedTodos };
-  } catch (error) {
+  } catch (err) {
+    console.log(err);
     response.status = 502;
-    response.body = { status: "Failed", error };
+    response.body = { status: "Failed", err };
   }
 };
