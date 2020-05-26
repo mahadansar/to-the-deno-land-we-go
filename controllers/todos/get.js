@@ -7,6 +7,10 @@ export default async ({ response }) => {
     const data = await Deno.readFile(FILE_PATH);
     const todos = JSON.parse(decoder.decode(data));
 
-    console.log(todos);
-  } catch (error) {}
+    response.status = 200;
+    response.body = { status: "success", todos };
+  } catch (error) {
+    response.status = 400;
+    response.body = { status: "failed", todos: [] };
+  }
 };
