@@ -12,13 +12,15 @@ export default async ({ response, params }) => {
     const data = await Deno.readFile(FILE_PATH);
     const todos = JSON.parse(decoder.decode(data));
 
-    const newTodo = { id: todos.length + 1, title, completed: false };
-    todos.push(newTodo);
+    const updatedTodos = todos.filter((todo) => todo.id !== Number(params.id));
 
-    await Deno.writeFile(FILE_PATH, encoder.encode(JSON.stringify(todos)));
+    await Deno.writeFile(
+      FILE_PATH,
+      encoder.encode(JSON.stringify(updatedTodos))
+    );
 
-    response.status = 201;
-    response.body = { status: "Success", newTodo };
+    response.status = 200;
+    response.body = { status: "Success", data: updatedTodos };
   } catch (error) {
     response.status = 502;
     response.body = { status: "Failed", error };
